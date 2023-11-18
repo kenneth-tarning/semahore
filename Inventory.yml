@@ -1,1 +1,22 @@
-#
+all:
+  children:
+    tarning_net:
+      vars:
+        ansible_user: tarning\administrator
+        ansible_winrm_transport: ntlm
+        ansible_connection: winrm
+        ansible_port: 5986
+        ansible_winrm_server_cert_validation: ignore
+      children:
+        servers:
+          hosts:
+            dc01.tarning.net:
+              ansible_host: 192.168.1.201
+        clients:
+          hosts:  
+            member01.tarning.net:
+              ansible_host: 192.168.1.202
+        ubuntu_vm:
+          hosts:  
+            admin.tarning.net:
+              ansible_host: 192.168.1.100
